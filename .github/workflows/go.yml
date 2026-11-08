@@ -24,6 +24,12 @@ jobs:
       with:
         go-version: ${{ matrix.go }}
 
+    - name: Cache Go modules
+      uses: actions/cache@v4
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
+
     - name: Install errcheck
       run: go install github.com/kisielk/errcheck@v1.30.0
 
